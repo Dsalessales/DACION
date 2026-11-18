@@ -129,11 +129,13 @@ html.theme-changing .site-header {
 }
 
 .theme-dot[aria-pressed="true"] {
-  box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px currentColor;
+  box-shadow: none;
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
 }
 
 .menu-overlay .theme-dot[aria-pressed="true"] {
-  box-shadow: 0 0 0 3px var(--ink), 0 0 0 4px var(--paper);
+  outline-offset: 3px;
 }
 
 .theme-dot:focus-visible {
@@ -218,4 +220,34 @@ html.theme-changing .site-header {
 /* Linhas da vitrine sem produtos não ocupam espaço */
 .catalog-grid:empty {
   display: none;
+}
+
+/*
+ * Couro: fundo em degradê, como a luz de estúdio da foto da marca.
+ * Mais claro em cima, um pouco à direita, escurecendo para as bordas.
+ * Fica numa camada fixa atrás do site, então a luz acompanha a rolagem.
+ * O ponto mais claro (#533A30) é o limite para o texto #B7AC9A manter
+ * contraste AA (4.65:1); daí para fora só escurece.
+ */
+html[data-theme="leather"] {
+  --paper-glow: radial-gradient(
+    ellipse 75% 65% at 62% 24%,
+    #533a30 0%,
+    #4b3127 34%,
+    #3a261e 66%,
+    #231714 100%
+  );
+}
+
+html[data-theme="leather"] body {
+  background: transparent;
+}
+
+html[data-theme="leather"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--paper-glow);
 }
