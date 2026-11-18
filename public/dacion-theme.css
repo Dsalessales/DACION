@@ -175,3 +175,47 @@ html.theme-changing .site-header {
     transition: none;
   }
 }
+
+/* Logo provisório: o nome DACION espaçado, como na identidade */
+.brand-mark.brand-word {
+  width: auto;
+  height: auto;
+  font-size: clamp(13px, 1.1vw, 20px);
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .brand-mark.brand-word {
+    font-size: 11px;
+    letter-spacing: 0.36em;
+  }
+}
+
+/* Botões de cor na página do produto mostram a cor da peça */
+.option-button.color-black {
+  background: #1a1918;
+  color: #f8f8f8;
+}
+
+.option-button.color-white {
+  background: #f8f8f8;
+  color: #1a1918;
+}
+
+.option-button.color-grey {
+  background: #c8c5bf;
+  color: #1a1918;
+}
+
+.option-button.color-light {
+  background: #a9bccb;
+  color: #1a1918;
+}
+
+/* Linhas da vitrine sem produtos não ocupam espaço */
+.catalog-grid:empty {
+  display: none;
+}

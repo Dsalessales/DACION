@@ -34,18 +34,16 @@
     out: "cubic-bezier(0.33, 1, 0.68, 1)",
   };
 
-  // Ordem de empilhamento da referência: chaveiro → camiseta escura → tote →
-  // ... → camiseta branca no topo. Usa os produtos reais pelo nome (alt).
+  // Ordem de empilhamento: o primeiro fica embaixo, o último (Crop Crewneck
+  // Black) termina no topo. Usa os produtos reais pelo nome (alt).
   var CARD_ORDER = [
-    "Command + K",
-    "Hello Week 002",
-    "Neutral Grotesk",
-    "Specimen No. HH01",
-    "Red Dot Not Award",
-    "Off by Design",
-    "Gridlocked",
-    "Kerned Confidence",
-    "Whitespace Matters",
+    "Wide Leg Jeans Light Wash",
+    "Boxy Tee Black",
+    "Crop Crewneck Grey",
+    "Wide Leg Jeans Black",
+    "Boxy Tee White",
+    "Waffle Long Sleeve",
+    "Crop Crewneck Black",
   ];
   // [rotação°, x%, y%, escala] por camada — profundidade irregular como na revista.
   var LAYOUT = [
