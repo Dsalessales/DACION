@@ -265,21 +265,27 @@ html[data-theme="leather"] body::before {
 
 /*
  * Topo da página inicial: a foto da marca ocupa a primeira tela e o nome
- * DACION é escrito por cima, em texto, na cor do tema escolhido.
- * Nos temas claros a foto ganha um véu da cor do tema, para o nome (escuro)
- * continuar legível; no Carvão a foto escurece um pouco.
+ * DACION é escrito por cima, em texto, numa cor clara da paleta do tema
+ * (a foto é sempre a mesma; as cores escuras sumiriam sobre ela).
+ *
+ * A foto tem as laterais estendidas (1630x936; o miolo original tem
+ * 1086x936). O zoom é travado: a altura da imagem é 1,38x a altura da tela,
+ * o mesmo enquadramento de uma tela 1440x900. Em telas mais largas, as
+ * laterais estendidas preenchem o espaço em vez de ampliar a foto.
  * O endereço da foto é relativo a este arquivo, para funcionar também na
  * subpasta do GitHub Pages.
  */
 :root,
-html[data-theme="leather"] { --hero-veil: transparent; }
-html[data-theme="charcoal"] { --hero-veil: rgba(26, 25, 24, 0.35); }
-html[data-theme="sand"] { --hero-veil: rgba(183, 172, 154, 0.55); }
-html[data-theme="white"] { --hero-veil: rgba(248, 248, 248, 0.55); }
+html[data-theme="leather"] { --hero-name: #b7ac9a; }
+html[data-theme="charcoal"] { --hero-name: #f8f8f8; }
+html[data-theme="sand"] { --hero-name: #b7ac9a; }
+html[data-theme="white"] { --hero-name: #f8f8f8; }
 
 .home-hero {
   --hero-photo-h: 100svh;
   --hero-photo-top: -104px;
+  /* altura da imagem na tela: zoom travado, mas sempre cobrindo a largura */
+  --hero-img-h: max(138svh, 100vw / 1.7415);
   display: flow-root; /* a margem negativa da foto não "vaza" para o bloco */
 }
 
@@ -288,32 +294,28 @@ html[data-theme="white"] { --hero-veil: rgba(248, 248, 248, 0.55); }
   display: block;
   height: var(--hero-photo-h);
   margin: var(--hero-photo-top) -24px 28px;
-  background:
-    linear-gradient(var(--hero-veil), var(--hero-veil)),
-    #3a261e url("brand/dacion-hero.webp") 50% 46% / cover no-repeat;
-  transition: background-color 0.45s ease;
+  background: #3a261e url("brand/dacion-hero.webp") 50% 46% / auto var(--hero-img-h) no-repeat;
 }
 
-/* O nome, no lugar onde estava escrito na foto */
+/* O nome, no lugar e no tamanho em que estava escrito na foto */
 .home-hero .hero-logo-word {
   position: absolute;
   left: 50%;
-  /* mesmo ponto onde o nome estava na foto (foto em "cover", ponto de foco 50% 46%) */
-  top: calc(var(--hero-photo-top) + 46svh - 0.0263 * max(86.18vw, 100svh));
+  top: calc(var(--hero-photo-top) + 46svh - 0.0263 * var(--hero-img-h));
   width: max-content;
   transform: translate(-50%, -50%);
   margin: 0;
   padding-left: 0.42em; /* compensa o espaço depois da última letra */
   font-family: "Syncopate", "Neue Haas", Arial, sans-serif;
   font-weight: 400;
-  /* mesma largura do nome original: 58% da largura da foto na tela */
-  font-size: min(calc(max(100vw, 116.03svh) * 0.0852), 12.8vw);
+  font-size: min(calc(var(--hero-img-h) * 0.0989), 12.8vw);
   -webkit-text-stroke: 0.014em currentColor; /* traço um pouco mais forte, como na identidade */
   line-height: 1;
   letter-spacing: 0.42em;
   text-align: center;
   white-space: nowrap;
-  color: var(--ink);
+  color: var(--hero-name);
+  transition: color 0.45s ease;
   pointer-events: none;
 }
 
@@ -329,14 +331,22 @@ html[data-theme="white"] { --hero-veil: rgba(248, 248, 248, 0.55); }
   .home-hero {
     --hero-photo-h: 125vw; /* foto em 4:5 na largura da tela */
     --hero-photo-top: -20px;
+    --hero-img-h: 125vw;
   }
 
   .home-hero::before {
     margin: var(--hero-photo-top) -16px 22px;
+    background-size: auto var(--hero-img-h);
   }
 
   .home-hero .hero-logo-word {
     top: calc(var(--hero-photo-top) + 54.2vw);
-    font-size: 12.35vw;
+    font-size: 12.36vw;
   }
+}
+
+/* Cabeçalho em cima da foto do topo: mesma cor clara do nome (dacion.js) */
+html.header-on-photo .site-header {
+  color: var(--hero-name);
+  transition: color 0.3s ease;
 }
