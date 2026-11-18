@@ -251,3 +251,14 @@ html[data-theme="leather"] body::before {
   pointer-events: none;
   background: var(--paper-glow);
 }
+
+/* Celular: sem o vão entre a apresentação e os produtos */
+@media (max-width: 767px) {
+  .hero-content {
+    margin-bottom: 40px;
+  }
+
+  .catalog-first {
+    margin-bottom: 64px;
+  }
+}
