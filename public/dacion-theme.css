@@ -268,9 +268,10 @@ html[data-theme="leather"] body::before {
  * DACION é escrito por cima, em texto, numa cor clara da paleta do tema
  * (a foto é sempre a mesma; as cores escuras sumiriam sobre ela).
  *
- * A foto tem as laterais estendidas (1630x936; o miolo original tem
- * 1086x936). O zoom é travado: a altura da imagem é 1,38x a altura da tela,
- * o mesmo enquadramento de uma tela 1440x900. Em telas mais largas, as
+ * A foto é uma faixa de 44% da altura da tela (84% da largura no celular),
+ * para as roupas aparecerem logo na primeira tela. Tem as laterais estendidas
+ * (1630x936; o miolo original tem 1086x936). O zoom é travado: a altura da
+ * imagem é 1,1x a altura da tela (e sempre cobre a largura). Em telas mais largas, as
  * laterais estendidas preenchem o espaço em vez de ampliar a foto.
  * O endereço da foto é relativo a este arquivo, para funcionar também na
  * subpasta do GitHub Pages.
@@ -282,10 +283,10 @@ html[data-theme="sand"] { --hero-name: #b7ac9a; }
 html[data-theme="white"] { --hero-name: #f8f8f8; }
 
 .home-hero {
-  --hero-photo-h: 100svh;
+  --hero-photo-h: 44svh; /* faixa da altura do antigo DACION grande: roupas na primeira tela */
   --hero-photo-top: -104px;
   /* altura da imagem na tela: zoom travado, mas sempre cobrindo a largura */
-  --hero-img-h: max(138svh, 100vw / 1.7415);
+  --hero-img-h: max(110svh, 100vw / 1.7415);
   --hero-solid: 0.7; /* até onde a foto ainda é quase opaca (dacion.js usa no cabeçalho) */
   display: flow-root; /* a margem negativa da foto não "vaza" para o bloco */
 }
@@ -294,7 +295,7 @@ html[data-theme="white"] { --hero-name: #f8f8f8; }
   content: "";
   display: block;
   height: var(--hero-photo-h);
-  margin: var(--hero-photo-top) -24px 28px;
+  margin: var(--hero-photo-top) -24px 18px;
   background: #3a261e url("brand/dacion-hero.webp") 50% 46% / auto var(--hero-img-h) no-repeat;
 }
 
@@ -302,7 +303,8 @@ html[data-theme="white"] { --hero-name: #f8f8f8; }
 .home-hero .hero-logo-word {
   position: absolute;
   left: 50%;
-  top: calc(var(--hero-photo-top) + 46svh - 0.0263 * var(--hero-img-h));
+  /* foco da foto em 46%: o nome fica em 0,46 x altura da faixa - 0,0263 x altura da imagem */
+  top: calc(var(--hero-photo-top) + 0.46 * var(--hero-photo-h) - 0.0263 * var(--hero-img-h));
   width: max-content;
   transform: translate(-50%, -50%);
   margin: 0;
@@ -330,19 +332,18 @@ html[data-theme="white"] { --hero-name: #f8f8f8; }
 
 @media (max-width: 767px) {
   .home-hero {
-    --hero-photo-h: 125vw; /* foto em 4:5 na largura da tela */
+    --hero-photo-h: 84vw; /* faixa um pouco mais baixa que quadrada */
     --hero-photo-top: -20px;
     --hero-img-h: 125vw;
     --hero-solid: 0.78;
   }
 
   .home-hero::before {
-    margin: var(--hero-photo-top) -16px 22px;
+    margin: var(--hero-photo-top) -16px 16px;
     background-size: auto var(--hero-img-h);
   }
 
   .home-hero .hero-logo-word {
-    top: calc(var(--hero-photo-top) + 54.2vw);
     font-size: 12.36vw;
   }
 }
@@ -396,5 +397,16 @@ html[data-theme="white"] .home-hero::before {
   html[data-theme="white"] .home-hero::before {
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0, 0, 0, 0.86) 86%, rgba(0, 0, 0, 0.55) 92%, rgba(0, 0, 0, 0.2) 97%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0, 0, 0, 0.86) 86%, rgba(0, 0, 0, 0.55) 92%, rgba(0, 0, 0, 0.2) 97%, transparent 100%);
+  }
+}
+
+/* Menos espaço entre a faixa da foto, o "Sobre" e as roupas */
+.hero-content {
+  margin-bottom: 28px;
+}
+
+@media (max-width: 767px) {
+  .hero-content {
+    margin-bottom: 28px;
   }
 }
