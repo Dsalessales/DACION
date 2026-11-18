@@ -410,3 +410,23 @@ html[data-theme="white"] .home-hero::before {
     margin-bottom: 28px;
   }
 }
+
+/*
+ * Telas de toque (celular, tablet): sem o efeito de "passar o mouse".
+ * No iPhone o Safari prende o estado :hover no card onde o dedo encostou
+ * (até rolando a página), e as fotos trocavam sozinhas ou ficavam com o
+ * destaque de toque por cima. Aqui cada card mostra só a foto principal.
+ */
+.product-card {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: none) {
+  .product-image.secondary {
+    display: none;
+  }
+
+  .product-card:hover .product-image.primary {
+    transform: none;
+  }
+}
