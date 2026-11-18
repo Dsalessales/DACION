@@ -262,3 +262,38 @@ html[data-theme="leather"] body::before {
     margin-bottom: 64px;
   }
 }
+
+/*
+ * Topo da página inicial: a foto da marca ocupa a primeira tela, no lugar
+ * do DACION gigante. O título continua no HTML (leitores de tela e a
+ * abertura animada usam ele), só não aparece.
+ * O endereço da foto é relativo a este arquivo, para funcionar também na
+ * subpasta do GitHub Pages.
+ */
+.home-hero::before {
+  content: "";
+  display: block;
+  height: 100svh;
+  margin: -104px -24px 28px;
+  background: #3a261e url("brand/dacion-hero.webp") 50% 46% / cover no-repeat;
+}
+
+.home-hero .hero-logo-word,
+.home-hero .hero-line {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .home-hero::before {
+    height: auto;
+    aspect-ratio: 4 / 5;
+    margin: -20px -16px 22px;
+  }
+}
