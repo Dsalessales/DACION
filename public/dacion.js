@@ -14,9 +14,12 @@
     var hero = document.querySelector(".home-hero");
     if (!hero) return 0;
     var r = hero.getBoundingClientRect();
-    var h = parseFloat(getComputedStyle(hero, "::before").height) || 0;
-    var top = parseFloat(getComputedStyle(hero, "::before").marginTop) || 0;
-    return r.top + top + h; // fundo da foto, em relação à janela
+    var cs = getComputedStyle(hero, "::before");
+    var h = parseFloat(cs.height) || 0;
+    var top = parseFloat(cs.marginTop) || 0;
+    // só a parte ainda opaca da foto conta (embaixo ela se dissolve no fundo)
+    var solid = parseFloat(getComputedStyle(hero).getPropertyValue("--hero-solid")) || 1;
+    return r.top + top + h * solid; // fim da parte opaca da foto, em relação à janela
   }
 
   function update() {
