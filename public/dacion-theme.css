@@ -1,0 +1,177 @@
+/*
+ * DACION — temas de cor (paleta da marca)
+ *
+ *   Carvão  #1A1918   Areia  #B7AC9A   Branco  #F8F8F8   Couro  #503225
+ *
+ * Cada tema define:
+ *   --paper / --ink        fundo e texto do site
+ *   --tint                 fundo das fotos enquanto carregam
+ *   --intro-paper/-ink     cores da abertura (o par oposto, para o site "surgir")
+ *   --background ...       mesmas cores em HSL para os componentes do bundle
+ *
+ * O tema escolhido fica em <html data-theme="..."> e em localStorage
+ * ("DACION-theme"); o script no <head> aplica antes da primeira pintura.
+ * Todos os pares texto/fundo passam no contraste AA (mín. 5.1:1).
+ */
+
+:root,
+html[data-theme="leather"] {
+  --paper: #503225;
+  --ink: #b7ac9a;
+  --signal: #f8f8f8;
+  --tint: #5d3b2c;
+  --intro-paper: #1a1918;
+  --intro-ink: #b7ac9a;
+  --hsl-paper: 18 37% 23%;
+  --hsl-ink: 37 17% 66%;
+}
+
+html[data-theme="charcoal"] {
+  --paper: #1a1918;
+  --ink: #b7ac9a;
+  --signal: #f8f8f8;
+  --tint: #272421;
+  --intro-paper: #503225;
+  --intro-ink: #b7ac9a;
+  --hsl-paper: 30 4% 10%;
+  --hsl-ink: 37 17% 66%;
+}
+
+html[data-theme="sand"] {
+  --paper: #b7ac9a;
+  --ink: #1a1918;
+  --signal: #503225;
+  --tint: #aa9e8a;
+  --intro-paper: #f8f8f8;
+  --intro-ink: #503225;
+  --hsl-paper: 37 17% 66%;
+  --hsl-ink: 30 4% 10%;
+}
+
+html[data-theme="white"] {
+  --paper: #f8f8f8;
+  --ink: #503225;
+  --signal: #1a1918;
+  --tint: #e9e4dc;
+  --intro-paper: #b7ac9a;
+  --intro-ink: #1a1918;
+  --hsl-paper: 0 0% 97%;
+  --hsl-ink: 18 37% 23%;
+}
+
+/* Componentes do bundle que leem as cores em HSL */
+:root,
+html[data-theme] {
+  --background: var(--hsl-paper);
+  --foreground: var(--hsl-ink);
+  --border: var(--hsl-ink);
+  --card: var(--hsl-paper);
+  --card-foreground: var(--hsl-ink);
+  --card-border: var(--hsl-ink);
+  --popover: var(--hsl-paper);
+  --popover-foreground: var(--hsl-ink);
+  --popover-border: var(--hsl-ink);
+  --primary: var(--hsl-ink);
+  --primary-foreground: var(--hsl-paper);
+  --secondary: var(--hsl-paper);
+  --secondary-foreground: var(--hsl-ink);
+  --muted: var(--hsl-paper);
+  --muted-foreground: var(--hsl-ink);
+  --accent: var(--hsl-ink);
+  --accent-foreground: var(--hsl-paper);
+  --destructive: var(--hsl-ink);
+  --destructive-foreground: var(--hsl-paper);
+  --input: var(--hsl-ink);
+  --ring: var(--hsl-ink);
+}
+
+/* Troca suave quando a pessoa escolhe outra cor */
+html.theme-changing,
+html.theme-changing body,
+html.theme-changing .site-header {
+  transition: background-color 0.45s ease, color 0.45s ease;
+}
+
+/* Cores que o bundle tinha fixas */
+.custom-cursor {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.product-image-wrap,
+.product-gallery img,
+.bag-row img {
+  background: var(--tint);
+}
+
+.footer-copy {
+  border-top-color: color-mix(in srgb, var(--ink) 45%, transparent);
+}
+
+/* Seletor de cor: uma bolinha por cor da paleta */
+.theme-dot.leather { background: #503225; }
+.theme-dot.charcoal { background: #1a1918; }
+.theme-dot.sand { background: #b7ac9a; }
+.theme-dot.white { background: #f8f8f8; }
+
+.theme-dot {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.theme-dot:hover {
+  transform: scale(1.15);
+}
+
+/* Cor escolhida: anel por fora, para a bolinha continuar mostrando a cor */
+.site-header .theme-switcher {
+  gap: 8px;
+}
+
+.theme-dot[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px currentColor;
+}
+
+.menu-overlay .theme-dot[aria-pressed="true"] {
+  box-shadow: 0 0 0 3px var(--ink), 0 0 0 4px var(--paper);
+}
+
+.theme-dot:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* No celular o seletor do topo some; ele aparece dentro do Menu */
+.menu-theme {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8vh;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.menu-overlay .theme-switcher {
+  display: flex;
+  gap: 10px;
+}
+
+.menu-overlay .theme-dot {
+  width: 28px;
+  height: 28px;
+}
+
+@media (min-width: 768px) {
+  .menu-theme {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-changing,
+  html.theme-changing body,
+  html.theme-changing .site-header,
+  .theme-dot {
+    transition: none;
+  }
+}

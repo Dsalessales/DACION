@@ -26,7 +26,6 @@
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (path !== "" || reduce || !root.animate) return abort();
 
-  var RED = "#ff0001";
   var EASE = {
     expoOut: "cubic-bezier(0.16, 1, 0.3, 1)",
     cardIn: "cubic-bezier(0.22, 1, 0.36, 1)",

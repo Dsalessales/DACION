@@ -6,7 +6,7 @@ html.ix-pending::after {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #ede4dd;
+  background: var(--intro-paper, #1a1918);
 }
 
 html.ix-running,
@@ -22,8 +22,8 @@ html.ix-running .custom-cursor {
   position: fixed;
   inset: 0;
   z-index: 9998;
-  background: #ede4dd;
-  color: #ff0001;
+  background: var(--intro-paper, #1a1918);
+  color: var(--intro-ink, #b7ac9a);
   font-family: "Neue Haas", Arial, sans-serif;
   pointer-events: all;
   overflow: hidden;
@@ -46,7 +46,7 @@ html.ix-running .custom-cursor {
   aspect-ratio: 3 / 4;
   margin: 0;
   overflow: hidden;
-  background: #d2cac3;
+  background: var(--tint, #5d3b2c);
   opacity: 0;
   will-change: transform, opacity;
   backface-visibility: hidden;
