@@ -34,16 +34,16 @@
     out: "cubic-bezier(0.33, 1, 0.68, 1)",
   };
 
-  // Ordem de empilhamento: o primeiro fica embaixo, o último (Crop Crewneck
-  // Black) termina no topo. Usa os produtos reais pelo nome (alt).
+  // Ordem de empilhamento: o primeiro fica embaixo, o último (Moletom
+  // Cropped Preto) termina no topo. Usa os produtos reais pelo nome (alt).
   var CARD_ORDER = [
-    "Wide Leg Jeans Light Wash",
-    "Boxy Tee Black",
-    "Crop Crewneck Grey",
-    "Wide Leg Jeans Black",
-    "Boxy Tee White",
-    "Waffle Long Sleeve",
-    "Crop Crewneck Black",
+    "Calça Jeans Wide Leg Clara",
+    "Calça Jeans Wide Leg Preta",
+    "Camiseta Boxy Preta",
+    "Moletom Cropped Cinza",
+    "Camiseta Boxy Branca",
+    "Manga Longa Waffle",
+    "Moletom Cropped Preto",
   ];
   // [rotação°, x%, y%, escala] por camada — profundidade irregular como na revista.
   var LAYOUT = [

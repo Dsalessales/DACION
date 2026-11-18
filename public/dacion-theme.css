@@ -195,22 +195,22 @@ html.theme-changing .site-header {
 }
 
 /* Botões de cor na página do produto mostram a cor da peça */
-.option-button.color-black {
+.option-button.color-preto {
   background: #1a1918;
   color: #f8f8f8;
 }
 
-.option-button.color-white {
+.option-button.color-branco {
   background: #f8f8f8;
   color: #1a1918;
 }
 
-.option-button.color-grey {
+.option-button.color-cinza {
   background: #c8c5bf;
   color: #1a1918;
 }
 
-.option-button.color-light {
+.option-button.color-azul {
   background: #a9bccb;
   color: #1a1918;
 }
