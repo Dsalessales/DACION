@@ -369,3 +369,32 @@ html.header-on-photo .site-header {
     mask-image: linear-gradient(to bottom, #000 0%, #000 70%, rgba(0, 0, 0, 0.55) 86%, transparent 100%);
   }
 }
+
+/*
+ * Temas claros (Areia e Branco): a passagem do marrom para o fundo claro
+ * aparece muito mais, então o degradê é mais curto (último quarto da foto)
+ * e com uma curva suave.
+ */
+html[data-theme="sand"] .home-hero,
+html[data-theme="white"] .home-hero {
+  --hero-solid: 0.8;
+}
+
+html[data-theme="sand"] .home-hero::before,
+html[data-theme="white"] .home-hero::before {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 76%, rgba(0, 0, 0, 0.86) 83%, rgba(0, 0, 0, 0.55) 90%, rgba(0, 0, 0, 0.2) 96%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 76%, rgba(0, 0, 0, 0.86) 83%, rgba(0, 0, 0, 0.55) 90%, rgba(0, 0, 0, 0.2) 96%, transparent 100%);
+}
+
+@media (max-width: 767px) {
+  html[data-theme="sand"] .home-hero,
+  html[data-theme="white"] .home-hero {
+    --hero-solid: 0.84;
+  }
+
+  html[data-theme="sand"] .home-hero::before,
+  html[data-theme="white"] .home-hero::before {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0, 0, 0, 0.86) 86%, rgba(0, 0, 0, 0.55) 92%, rgba(0, 0, 0, 0.2) 97%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0, 0, 0, 0.86) 86%, rgba(0, 0, 0, 0.55) 92%, rgba(0, 0, 0, 0.2) 97%, transparent 100%);
+  }
+}
