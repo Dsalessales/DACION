@@ -264,36 +264,79 @@ html[data-theme="leather"] body::before {
 }
 
 /*
- * Topo da página inicial: a foto da marca ocupa a primeira tela, no lugar
- * do DACION gigante. O título continua no HTML (leitores de tela e a
- * abertura animada usam ele), só não aparece.
+ * Topo da página inicial: a foto da marca ocupa a primeira tela e o nome
+ * DACION é escrito por cima, em texto, na cor do tema escolhido.
+ * Nos temas claros a foto ganha um véu da cor do tema, para o nome (escuro)
+ * continuar legível; no Carvão a foto escurece um pouco.
  * O endereço da foto é relativo a este arquivo, para funcionar também na
  * subpasta do GitHub Pages.
  */
+:root,
+html[data-theme="leather"] { --hero-veil: transparent; }
+html[data-theme="charcoal"] { --hero-veil: rgba(26, 25, 24, 0.35); }
+html[data-theme="sand"] { --hero-veil: rgba(183, 172, 154, 0.55); }
+html[data-theme="white"] { --hero-veil: rgba(248, 248, 248, 0.55); }
+
+.home-hero {
+  --hero-photo-h: 100svh;
+  --hero-photo-top: -104px;
+  display: flow-root; /* a margem negativa da foto não "vaza" para o bloco */
+}
+
 .home-hero::before {
   content: "";
   display: block;
-  height: 100svh;
-  margin: -104px -24px 28px;
-  background: #3a261e url("brand/dacion-hero.webp") 50% 46% / cover no-repeat;
+  height: var(--hero-photo-h);
+  margin: var(--hero-photo-top) -24px 28px;
+  background:
+    linear-gradient(var(--hero-veil), var(--hero-veil)),
+    #3a261e url("brand/dacion-hero.webp") 50% 46% / cover no-repeat;
+  transition: background-color 0.45s ease;
 }
 
-.home-hero .hero-logo-word,
-.home-hero .hero-line {
+/* O nome, no lugar onde estava escrito na foto */
+.home-hero .hero-logo-word {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  left: 50%;
+  /* mesmo ponto onde o nome estava na foto (foto em "cover", ponto de foco 50% 46%) */
+  top: calc(var(--hero-photo-top) + 46svh - 0.0263 * max(86.18vw, 100svh));
+  width: max-content;
+  transform: translate(-50%, -50%);
   margin: 0;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
+  padding-left: 0.42em; /* compensa o espaço depois da última letra */
+  font-family: "Syncopate", "Neue Haas", Arial, sans-serif;
+  font-weight: 400;
+  /* mesma largura do nome original: 58% da largura da foto na tela */
+  font-size: min(calc(max(100vw, 116.03svh) * 0.0852), 12.8vw);
+  -webkit-text-stroke: 0.014em currentColor; /* traço um pouco mais forte, como na identidade */
+  line-height: 1;
+  letter-spacing: 0.42em;
+  text-align: center;
   white-space: nowrap;
+  color: var(--ink);
+  pointer-events: none;
+}
+
+.home-hero .hero-logo-word .hero-registered {
+  display: none;
+}
+
+.home-hero .hero-line {
+  display: none;
 }
 
 @media (max-width: 767px) {
+  .home-hero {
+    --hero-photo-h: 125vw; /* foto em 4:5 na largura da tela */
+    --hero-photo-top: -20px;
+  }
+
   .home-hero::before {
-    height: auto;
-    aspect-ratio: 4 / 5;
-    margin: -20px -16px 22px;
+    margin: var(--hero-photo-top) -16px 22px;
+  }
+
+  .home-hero .hero-logo-word {
+    top: calc(var(--hero-photo-top) + 54.2vw);
+    font-size: 12.35vw;
   }
 }
